@@ -37,6 +37,16 @@ public class FacultyDAOImpl extends BaseDAOImpl<FacultyDTO> implements FacultyDA
 
 		List<Predicate> whereCondition = new ArrayList<Predicate>();
 
+		if (!isEmptyString(dto.getFirstName())) {
+
+			whereCondition.add(builder.like(qRoot.get("firstName"), dto.getFirstName() + "%"));
+		}
+
+		if (!isEmptyString(dto.getEmail())) {
+
+			whereCondition.add(builder.like(qRoot.get("email"), dto.getEmail() + "%"));
+		}
+
 		if (!isEmptyString(dto.getCollegeName())) {
 
 			whereCondition.add(builder.like(qRoot.get("collegeName"), dto.getCollegeName() + "%"));

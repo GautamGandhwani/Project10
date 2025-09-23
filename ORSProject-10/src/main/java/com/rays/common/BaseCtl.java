@@ -76,9 +76,28 @@ public class BaseCtl<F extends BaseForm, T extends BaseDTO, S extends BaseServic
 			T dto = (T) form.getDto();
 
 			if (dto.getId() != null && dto.getId() > 0) {
+				T existDto1 = (T) baseService.findByUniqueKey(dto.getUniqueKey(), dto.getUniqueValue(), userContext);
+				if (existDto1 != null && dto.getId() != existDto1.getId()) {
+					res.addMessage(dto.getLabel() + " already exist");
+					res.setSuccess(false);
+					return res;
+				}
 				baseService.update(dto, userContext);
+				res.addMessage("Data updated successfully..!!");
+				res.addData(dto.getId());
+				res.addMessage(dto.getLabel() + " updated successfully..!!");
 			} else {
+				if (dto.getUniqueKey() != null && !dto.getUniqueKey().equals("")) {
+					T existDto = (T) baseService.findByUniqueKey(dto.getUniqueKey(), dto.getUniqueValue(), userContext);
+					if (existDto != null) {
+						res.addMessage(dto.getLabel() + " already exist");
+						res.setSuccess(false);
+						return res;
+					}
+				}
 				baseService.add(dto, userContext);
+				res.addMessage("Data added successfully..!!");
+				res.addMessage(dto.getLabel() + " added successfully..!!");
 			}
 			res.addData(dto.getId());
 		} catch (Exception e) {
@@ -139,6 +158,14 @@ public class BaseCtl<F extends BaseForm, T extends BaseDTO, S extends BaseServic
 		ORSResponse res = new ORSResponse(true);
 
 		res.addData(baseService.search(dto, pageNo, pageSize, userContext));
+		List list = baseService.search(dto, pageNo, pageSize, userContext);
+
+		if (list.size() == 0) {
+			res.setSuccess(false);
+			res.addMessage("Record not found..!!");
+		} else {
+			res.addData(list);
+		}
 
 		return res;
 	}

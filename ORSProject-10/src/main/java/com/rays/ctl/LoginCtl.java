@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +38,7 @@ public class LoginCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 
 		if (dto == null) {
 			res.setSuccess(false);
-			res.addMessage("Invalid ID or Password");
+			res.addMessage("Invalid Login ID & Password");
 		} else {
 			UserContext context = new UserContext(dto);
 
@@ -49,7 +50,6 @@ public class LoginCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 			res.addResult("role", dto.getRoleName());
 			res.addResult("fname", dto.getFirstName());
 			res.addResult("lname", dto.getLastName());
-
 			return res;
 		}
 		return res;
@@ -88,6 +88,18 @@ public class LoginCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 
 		res.setSuccess(true);
 		res.addMessage("User has been registered successfully..!!");
+		return res;
+	}
+
+	@GetMapping("logout")
+	public ORSResponse logout(HttpSession session) throws Exception {
+
+		ORSResponse res = new ORSResponse();
+
+		session.invalidate();
+
+		res.addMessage("Logout successfully..!!");
+
 		return res;
 	}
 }

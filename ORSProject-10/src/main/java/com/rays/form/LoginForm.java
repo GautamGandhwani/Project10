@@ -5,11 +5,11 @@ import javax.validation.constraints.NotEmpty;
 
 public class LoginForm {
 
-	@NotEmpty(message = "loginId is required")
+	@NotEmpty(message = "Login Id is required")
 	@Email
 	private String loginId;
 
-	@NotEmpty(message = "password is required")
+	@NotEmpty(message = "Password is required")
 	private String password;
 
 	public String getLoginId() {
