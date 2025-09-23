@@ -8,7 +8,7 @@ import { EndpointServiceService } from './endpoint-service.service';
 })
 export class ServiceLocatorService {
 
-  httpService: any = null;
+   httpService: any = null;
   router: any = null;
   endpoints: any = null;
 
@@ -17,6 +17,7 @@ export class ServiceLocatorService {
     this.router = r;
     this.endpoints = ep;
   }
+
   getPathVariable(route: ActivatedRoute, callback: any) {
     route.params.subscribe(params => {
       callback(params)

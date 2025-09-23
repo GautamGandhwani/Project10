@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
 
-  enpoint = "http://localhost:8080/Auth";
+  endpoint = "http://localhost:8080/Auth/";
 
   form: any = {
     data: {}
@@ -28,9 +27,9 @@ export class NavbarComponent {
     }
   }
 
-  logout(){
-    var _self=this;
-    this.httpService.get(this.enpoint+'logout',function(res:any){
+  logout() {
+    var _self = this;
+    this.httpService.get(this.endpoint + 'logout', function (res: any) {
       localStorage.clear();
       _self.router.navigateByUrl('login')
     });
