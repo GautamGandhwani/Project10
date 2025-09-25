@@ -80,4 +80,8 @@ public class CollegeDTO extends BaseDTO {
 	public String getLabel() {
 		return "College Name";
 	}
+
+	public String getTable() {
+		return "College";
+	}
 }

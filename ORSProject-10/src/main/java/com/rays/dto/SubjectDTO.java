@@ -69,4 +69,8 @@ public class SubjectDTO extends BaseDTO {
 	public String getLabel() {
 		return "Subject Name";
 	}
+
+	public String getTable() {
+		return "Subject";
+	}
 }

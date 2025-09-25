@@ -58,4 +58,8 @@ public class CourseDTO extends BaseDTO {
 	public String getLabel() {
 		return "Course Name";
 	}
+
+	public String getTable() {
+		return "Course";
+	}
 }

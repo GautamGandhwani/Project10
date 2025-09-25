@@ -91,4 +91,8 @@ public class MarksheetDTO extends BaseDTO {
 	public String getLabel() {
 		return "Roll No";
 	}
+
+	public String getTable() {
+		return "Marksheet";
+	}
 }

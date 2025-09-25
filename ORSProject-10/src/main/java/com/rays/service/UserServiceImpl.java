@@ -49,4 +49,25 @@ public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDAOInt> implem
 		}
 		return null;
 	}
+
+	public UserDTO forgotPassword(String loginId) {
+
+		UserDTO dto = findByLoginId(loginId, null);
+		if (dto == null) {
+			return null;
+		}
+		return dto;
+	}
+
+	public UserDTO changePassword(String loginId, String oldPassword, String newPassword, UserContext userContext) {
+
+		UserDTO dto = findByLoginId(loginId, null);
+		if (dto != null && oldPassword.equals(dto.getPassword())) {
+			dto.setPassword(newPassword);
+			update(dto, userContext);
+			return dto;
+		} else {
+			return null;
+		}
+	}
 }

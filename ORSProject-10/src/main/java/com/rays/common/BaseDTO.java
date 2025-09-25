@@ -29,12 +29,14 @@ public abstract class BaseDTO implements DropdownList {
 
 	@Column(name = "modified_datetime")
 	protected Timestamp modifiedDatetime;
-	
+
 	public abstract String getUniqueKey();
 
 	public abstract String getUniqueValue();
 
 	public abstract String getLabel();
+
+	public abstract String getTable();
 
 	public Long getId() {
 		return id;

@@ -115,4 +115,8 @@ public class StudentDTO extends BaseDTO {
 	public String getLabel() {
 		return "Enroll No";
 	}
+
+	public String getTable() {
+		return "Student";
+	}
 }

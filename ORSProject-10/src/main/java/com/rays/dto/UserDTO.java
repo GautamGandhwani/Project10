@@ -190,4 +190,8 @@ public class UserDTO extends BaseDTO {
 	public String getLabel() {
 		return "Login Id";
 	}
+
+	public String getTable() {
+		return "User";
+	}
 }

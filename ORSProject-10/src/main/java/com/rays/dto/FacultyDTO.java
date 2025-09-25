@@ -170,4 +170,8 @@ public class FacultyDTO extends BaseDTO {
 	public String getLabel() {
 		return "Email";
 	}
+
+	public String getTable() {
+		return "Faculty";
+	}
 }

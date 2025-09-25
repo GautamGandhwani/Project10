@@ -105,14 +105,22 @@ public class TimeTableDTO extends BaseDTO {
 	}
 
 	public String getUniqueKey() {
-		return null;
+		return "courseName";
 	}
 
 	public String getUniqueValue() {
-		return null;
+		return courseName;
 	}
 
 	public String getLabel() {
 		return null;
+	}
+	
+	public String getTableName() {
+		return null;
+	}
+
+	public String getTable() {
+		return "TimeTable";
 	}
 }

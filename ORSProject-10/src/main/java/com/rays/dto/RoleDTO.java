@@ -47,4 +47,8 @@ public class RoleDTO extends BaseDTO {
 	public String getLabel() {
 		return "Role Name";
 	}
+
+	public String getTable() {
+		return "ROle";
+	}
 }
