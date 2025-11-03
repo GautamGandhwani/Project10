@@ -36,7 +36,8 @@
 
         <tr>
             <th align="left">Phone No<span style="color: red">*</span></th>
-            <td><input type="text" name="phoneNo" [(ngModel)]="form.data.phoneNo" maxlength="10" placeholder="Enter Phone No."></td>
+            <td><input type="text" name="phoneNo" [(ngModel)]="form.data.phoneNo" maxlength="10"
+                    placeholder="Enter Phone No."></td>
             <td style="position: fixed; color: red;">{{form.inputerror.phoneNo}}</td>
         </tr>
 
@@ -45,8 +46,11 @@
         <tr>
             <th></th>
             <td align="left" colspan="2">
-                <button (click)="submit()">save</button> &nbsp;
-                <button (click)="forward('/collegelist')">list</button>
+                <button *ngIf="!form.data.id" (click)="submit()">save</button>&nbsp;
+
+                <button *ngIf="form.data.id>0" (click)="submit()">Update</button> &nbsp;
+                <button *ngIf="form.data.id>0" (click)="forward('/collegelist')">List</button>
+                <button *ngIf="!form.data.id" (click)="reset()">Reset</button>
             </td>
         </tr>
     </table>

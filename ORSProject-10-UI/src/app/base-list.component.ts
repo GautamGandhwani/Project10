@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class BaseListCtl extends BaseCtl {
 
- @ViewChildren('checkboxes') checkboxes!: QueryList<ElementRef>;
+  @ViewChildren('checkboxes') checkboxes!: QueryList<ElementRef>;
 
     deleteRecordList: any[] = [];
 
@@ -47,6 +47,8 @@ export class BaseListCtl extends BaseCtl {
 
     override deleteMany() {
         this.form.error = false;
+        this.deleteRecordList = [];
+
         this.checkboxes.forEach(cb => {
             if (cb.nativeElement.checked) {
                 this.deleteRecordList.push(cb.nativeElement.id);
@@ -54,11 +56,12 @@ export class BaseListCtl extends BaseCtl {
         });
 
         if (this.deleteRecordList.length > 0) {
+            this.form.pageNo = 0;
             super.deleteMany(this.deleteRecordList + '?pageNo=' + this.form.pageNo);
         } else {
-            this.form.message = "Select at least one record";
             this.form.error = true;
+            this.form.message = "Select at least one record";
         }
         this.isMasterSel = false;
-    }    
+    }
 }

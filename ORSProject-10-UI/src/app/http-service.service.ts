@@ -7,12 +7,24 @@ import { Router } from '@angular/router';
 })
 export class HttpServiceService {
 
+  token: any = '';
+
+  setToken(token: any) {
+    this.token = localStorage.getItem('token');
+    //  console.log(this.token + '----> inside setToken');
+  }
+
+  getToken() {
+    console.log(localStorage.getItem('token') + '====>> getToken');
+    return localStorage.getItem('token');
+  }
+
   constructor(private httpClient: HttpClient, private router: Router) {
 
   }
 
   post(endpoint: any, bean: any, callback: any) {
-     return this.httpClient.post(endpoint, bean, { withCredentials: true }).subscribe((data) => {
+    return this.httpClient.post(endpoint, bean, { withCredentials: true }).subscribe((data) => {
       callback(data);
     }, (error) => {
       this.handleError(error);
@@ -20,7 +32,7 @@ export class HttpServiceService {
   }
 
   get(endpoint: any, callback: any) {
-     return this.httpClient.get(endpoint, { withCredentials: true }).subscribe((data) => {
+    return this.httpClient.get(endpoint, { withCredentials: true }).subscribe((data) => {
       callback(data);
     }, (error) => {
       this.handleError(error);

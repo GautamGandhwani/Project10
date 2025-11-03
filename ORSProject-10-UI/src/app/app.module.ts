@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -31,6 +31,15 @@ import { TimetableListComponent } from './timetable/timetable-list.component';
 import { FacultyComponent } from './faculty/faculty.component';
 import { FacultyListComponent } from './faculty/faculty-list.component';
 import { FooterComponent } from './footer/footer.component';
+import { MyprofileComponent } from './user/myprofile.component';
+import { ChangepasswordComponent } from './user/changepassword.component';
+import { ForgotpasswordComponent } from './login/forgotpassword.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function myHttpLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -57,10 +66,20 @@ import { FooterComponent } from './footer/footer.component';
     TimetableListComponent,
     FacultyComponent,
     FacultyListComponent,
-    FooterComponent
+    FooterComponent,
+    MyprofileComponent,
+    ChangepasswordComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: myHttpLoader,
+        deps: [HttpClient]
+      }
+    }),
     AppRoutingModule,
     FormsModule,
     HttpClientModule
@@ -69,7 +88,8 @@ import { FooterComponent } from './footer/footer.component';
     HttpServiceService,
     EndpointServiceService,
     ServiceLocatorService,
-    AuthServiceService
+    AuthServiceService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthServiceService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

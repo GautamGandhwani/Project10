@@ -16,7 +16,8 @@ export class BaseCtl implements OnInit {
         searchParams: {}, //search form
         preload: [], // preload data
         list: [], // search list 
-        pageNo: 0
+        pageNo: 0,
+        nextListSize: 0
     };
 
     public api: any = {
@@ -82,7 +83,6 @@ export class BaseCtl implements OnInit {
         this.serviceLocator.httpService.post(this.api.save, this.form.data, function (res: any) {
             _self.form.message = '';
             _self.form.inputerror = {};
-
             if (res.success) {
                 _self.form.message = res.result.message;
                 _self.form.data.id = res.result.data;
@@ -99,10 +99,12 @@ export class BaseCtl implements OnInit {
     search() {
         var _self = this;
         this.serviceLocator.httpService.post(_self.api.search + "/" + _self.form.pageNo, _self.form.searchParams, function (res: any) {
+            _self.form.message = '';
+            _self.form.list = [];
             if (res.success) {
                 _self.form.error = false;
-                _self.form.message = '';
                 _self.form.list = res.result.data;
+                _self.form.nextListSize = res.result.nextListSize;
             } else {
                 _self.form.error = true;
                 _self.form.message = res.result.message;
@@ -112,11 +114,14 @@ export class BaseCtl implements OnInit {
 
     deleteMany(id: any) {
         var _self = this;
-        this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.data, function (res: any) {
+        this.serviceLocator.httpService.post(_self.api.deleteMany + "/" + id, this.form.searchParams, function (res: any) {
+            _self.form.message = '';
+            _self.form.list = [];
             if (res.success) {
+                _self.form.error = false;
                 _self.form.message = res.result.message;
-                _self.form.pageNo = 0;
-                _self.search();
+                _self.form.list = res.result.data;
+                _self.form.nextListSize = res.result.nextListSize;
             } else {
                 _self.form.error = true;
                 _self.form.message = res.result.message;

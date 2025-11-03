@@ -21,6 +21,9 @@ import { TimetableListComponent } from './timetable/timetable-list.component';
 import { FacultyComponent } from './faculty/faculty.component';
 import { FacultyListComponent } from './faculty/faculty-list.component';
 import { SignupComponent } from './login/signup.component';
+import { ForgotpasswordComponent } from './login/forgotpassword.component';
+import { MyprofileComponent } from './user/myprofile.component';
+import { ChangepasswordComponent } from './user/changepassword.component';
 
 const routes: Routes = [
   {
@@ -147,6 +150,22 @@ const routes: Routes = [
   {
     path: 'facultylist',
     component: FacultyListComponent
+  },
+  {
+    path: 'forgotpassword',
+    component: ForgotpasswordComponent
+  },
+  {
+    path: 'myprofile',
+    component: MyprofileComponent
+  },
+  {
+    path: 'myprofile/:id',
+    component: MyprofileComponent
+  },
+  {
+    path: 'changepassword',
+    component: ChangepasswordComponent
   }
 ];
 
