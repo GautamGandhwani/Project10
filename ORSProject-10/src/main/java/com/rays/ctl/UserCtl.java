@@ -39,7 +39,7 @@ public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 		res.addResult("roleList", list);
 		return res;
 	}
-	
+
 	@PostMapping("myProfile")
 	public ORSResponse myProfile(@RequestBody @Valid MyProfileForm form, BindingResult bindingResult) {
 
@@ -57,7 +57,7 @@ public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 		dto.setGender(form.getGender());
 
 		baseService.update(dto, userContext);
-		
+
 		res.setSuccess(true);
 		res.addMessage("Your Profile updated successfully..!!");
 
@@ -87,4 +87,5 @@ public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 
 		return res;
 	}
+
 }
