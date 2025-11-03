@@ -26,7 +26,7 @@ public class MarksheetCtl extends BaseCtl<MarksheetForm, MarksheetDTO, Marksheet
 	public ORSResponse preload() {
 		ORSResponse res = new ORSResponse(true);
 		List<StudentDTO> list = studentService.search(new StudentDTO(), userContext);
-		res.addResult("stucentList", list);
+		res.addResult("studentList", list);
 		return res;
 	}
 }
